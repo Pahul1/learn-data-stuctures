@@ -1,0 +1,1 @@
+Iterate through an array with two pointers

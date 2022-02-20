@@ -1,0 +1,3 @@
+A linked list is a linear data structure that stores data as objects. The object(or node) will have at least one value field, and one reference field that links it to the next node;
+
+Linked lists have O(N) time to access elements where N is the number of elements from the head of the list that the node is located at. Insert operation and delete operation, however, are O(1) time. Do not confuse this to mean that we can insert a node with O(1) complexity in the middle of a linked list. Inserting into the middle of a list does two operations: index(access) and insert, taking O(n) + O(1) time;
