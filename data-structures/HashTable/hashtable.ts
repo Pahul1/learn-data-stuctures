@@ -1,6 +1,6 @@
-import { LinkedList } from "../linked-list/doubleLinkedList";
+import { DoubleLinkedList } from "../linked-list/doubleLinkedList";
 
-class HashTable {
+export class HashTable {
     data: any[]
     constructor(size: number) {
         this.data = new Array(size);
@@ -33,15 +33,15 @@ class HashTable {
             let linkedList = this.data[index];
         linkedList.addAtTail(key, value);
         } else if(typeof this.data[index] === 'number') {
-            let linkedList = new LinkedList(key, value);
+            let linkedList = new DoubleLinkedList(key, value);
             this.data[index] = linkedList;
         } else {
             this.data[index] = value;
         }
     }
 
-    getFromList(key: string, linkedList: LinkedList) {
-        let node: LinkedListNode | null = linkedList.head;
+    getFromList(key: string, linkedList: DoubleLinkedList) {
+        let node: DoubleLinkedList | null = linkedList.head;
         while(node != null) {
         if(node.key === key) return node.value;
         node = node.next;

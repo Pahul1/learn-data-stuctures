@@ -1,6 +1,6 @@
 import { SingleLinkedListNode } from './linkedListNode';
 
-export class LinkedList {
+export class SingleLinkedList {
   head: SingleLinkedListNode;
   tail: SingleLinkedListNode;
   length: number;
@@ -35,6 +35,7 @@ export class LinkedList {
       this.tail = newNode;
     }
     node.next = newNode;
+    this.length++;
   }
 
   remove(prev: SingleLinkedListNode, node: SingleLinkedListNode)   {
@@ -51,6 +52,7 @@ export class LinkedList {
       prev.next = next;
     }
     node.next = null;
+    this.length--;
   }
 
   add(index: any, newValue: any) {
@@ -61,7 +63,6 @@ export class LinkedList {
     }
     if(iterator) {
       this.insert(iterator, newValue);
-      this.length++;
       return true;
     } else {
       return false;
@@ -73,7 +74,6 @@ export class LinkedList {
     while(iterator != null) {
       if(iterator.value === value) {
         this.insert(iterator, newValue);
-        this.length++;
         return true;
       }
       iterator = iterator.next;
@@ -87,7 +87,6 @@ export class LinkedList {
     while(iterator != null) {
       if(iterator.value === value) {
         this.remove(prev, iterator);
-        this.length--;
         return true;
       }
       prev = iterator;

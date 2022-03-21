@@ -14,7 +14,7 @@ export class MinStack {
 
     pop(): void {
         this.arr.pop();
-        if(this.isEmpty()) {
+        if(!this.isEmpty()) {
             this.calcMin();
         } else {
             this.min = undefined;   
@@ -22,7 +22,7 @@ export class MinStack {
     }
 
     isEmpty() {
-        return this.arr.length > 0;
+        return this.arr.length <= 0;
     }
 
     top(): number {
