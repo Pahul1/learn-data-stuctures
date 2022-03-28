@@ -9,7 +9,7 @@ For example, given the array [5, 1, 3, 5, 2, 3, 4, 1], return 5 as the longest s
 ### Brute Force 
 *Time Complexity: O(N^2), SpaceComplexity: O(N)*
 
-The most direct and brute force method would be to go through each element and find the longest subarray with distinct values and keep track of the longest length;
+The brute force method would be to go through each element and find the longest subarray with distinct values and keep track of the longest length;
 
 Steps:
   1. Instantiate max_length (the variable we are going to return) to zero
@@ -18,7 +18,7 @@ Steps:
       *When a duplicate is found, calculate length of the current subarray. If greater than the max length found, replace the max.
   2. Return max;
 
-Code (**In Typescript**)
+Code (**Typescript**)
 ```
 function largestSubarrayHorriblePerformance(arr: number[])
 {
@@ -48,10 +48,16 @@ function getSubArrayLength(index: number, arr: number[]) {
 }
 ```
 
-While this solution gets us the solution, we can do better! When we are working with huge arrays, this answer will be too slow to be able to be used in a production 
+While this solution gets us the answer, we can always do better! When we have to solve this problem with a huge input array, this answer will be too slow to be able to be used in a production level codebase dealing with millions and millions of users. Of course, this isn't a usual problem we need to solve, but we should always strive to get the best performance without ruining readability.
 
+### Two Pointers
+*Time Complexity: O(n), Space Complexity: O(n)*
 
-Code (Typescript):
+Let's look at the previous solution. We are looping through the array with two pointers (*using two for loops*), one for the element we are currently at (lets call it curr), and the second pointer (lets call it iterator) to loop through the rest of array. When we hit a duplicate occurrence, we move the the **curr pointer** to the next element, set **iterator pointer** to the index of curr pointer + 1, and start the process over again. 
+
+How can we optimize this? Can we maybe instead of setting curr pointer to the next element, set curr pointer to the index after the first occurence of the duplicate element. Lets take an example. Assume our input is [8, 9, 5, 1, 6, 3, 5, 2, 3, 4, 1]. When we get to the second 5, our first iteration would using the first solution would set the curr pointer to 9. Instead, we can skip 9, 5 because they are already part of the previous sub array before the duplicate occurence. We now can set curr pointer to point to 1 at index 3 in the array. 
+
+Code (**Typescript**)
 ```
 // O(n) time, O(n) space
 function largest_subarray(arr: number[])
@@ -67,7 +73,7 @@ function largest_subarray(arr: number[])
         // each element + 1, we can just set the slow pointer to that value;
         slow = Math.max(map.has(arr[fast]) ? map.get(arr[fast]) : 0, slow);
 
-        // Update ans to store maximum length of subarray. Make sure to add one to include one of the elements that were duplicated.
+        // Update ans to store maximum length of subarray. Make sure to add one to include one of the duplicate element.
         ans = Math.max(ans, fast - slow + 1);
 
         // Store the index of current element of arr[i]. Store value as the key and index (i) + 1 (because this is the next starting point)
