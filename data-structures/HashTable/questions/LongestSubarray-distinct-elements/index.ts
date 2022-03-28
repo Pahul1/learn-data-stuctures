@@ -1,3 +1,5 @@
+
+// O(n) time, O(n) space
 function largest_subarray(arr: number[])
 {
     // Stores index of array elements
@@ -20,4 +22,32 @@ function largest_subarray(arr: number[])
    
     // Return final ans
     return ans;
+}
+
+// O(n^2)
+function largestSubarrayHorriblePerformance(arr: number[])
+{
+    let max_length: number = 0;
+    for(let curr: number = 0; curr < arr.length; curr++)
+    {
+        let len = getSubArrayLength(curr, arr);
+        max_length = Math.max(len, max_length);
+    }
+    // Return final ans
+    return max_length;
+}
+
+function getSubArrayLength(index: number, arr: number[]) {
+    let set = new Set();
+    set.add(arr[index]);
+    
+    let length = 1;
+    for(let i = index + 1; i < arr.length; i++) {
+        if(set.has(arr[i])) {
+            return length;
+        }
+        set.add(arr[i]);
+        length++;
+    }
+    return length;
 }
